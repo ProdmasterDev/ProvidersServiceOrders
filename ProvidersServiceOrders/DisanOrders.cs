@@ -14,15 +14,18 @@ namespace ProvidersServiceOrders
     [ComVisible(true)]
     public class DisanOrders : IDisanOrders
     {
+        private bool _debug = false;
+        public void SetDebugMode() { _debug = true; }
+        public DisanOrders() { }
         public OrderApiResponseModel CreateOrder(OrderApiModel order)
         {
-            var service = new ProdmasterProvidersServiceOrders();
+            var service = new ProdmasterProvidersServiceOrders(_debug);
             return service.CreateOrder(order);
         }
 
         public ArrayList GetOrders()
         {
-            var service = new ProdmasterProvidersServiceOrders();
+            var service = new ProdmasterProvidersServiceOrders(_debug);
             var orders = service.GetOrders();
             var list = new ArrayList();
             foreach (var order in orders)
@@ -34,20 +37,25 @@ namespace ProvidersServiceOrders
 
         public void ApproveOrders(OrderListManager listManager)
         {
-            var service = new ProdmasterProvidersServiceOrders();
+            var service = new ProdmasterProvidersServiceOrders(_debug);
             var orders = listManager.GetOrders();
             service.ApproveOrders(orders);
         }
 
         public void DeclineOrder(OrderApiModel order)
         {
-            var service = new ProdmasterProvidersServiceOrders();
+            var service = new ProdmasterProvidersServiceOrders(_debug);
             service.DeclineOrder(order);
         }
 
         public OrderListManager GetListOfOrderApiModelInstance()
         {
             return new OrderListManager();
+        }
+
+        public OrderProductApiModel GetOrderProductApiModelInstance()
+        {
+            return new OrderProductApiModel();
         }
 
         public OrderApiModel GetOrderApiModelInstance()

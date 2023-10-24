@@ -12,13 +12,9 @@ namespace ProvidersServiceOrders.Classes
 {
     public class ProdmasterProvidersServiceOrders : IRest
     {
+        public string ApiUri { get; set; } = "https://partner.prodmasterpro.ru/api";
         public ProdmasterProvidersServiceOrders() { }
-        #if DEBUG
-                    public string ApiUri { get; set; } = "http://localhost:5656/api";
-        #else
-                public string ApiUri { get; set; } = "https://partner.prodmasterpro.ru/api";
-        #endif
-
+        public ProdmasterProvidersServiceOrders(bool debug) { if (debug) { ApiUri = "http://localhost:5656/api"; } }
 
         public List<OrderApiModel> GetOrders()
         {
