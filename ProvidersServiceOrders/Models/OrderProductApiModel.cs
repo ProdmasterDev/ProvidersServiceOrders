@@ -8,8 +8,29 @@ namespace ProvidersServiceOrders.Models
 {
     public class OrderProductApiModel
     {
-        public long DisanId { get; set; }
+        public long? DisanId { get; set; }
+        public long? StockId { get; set; }
         public double Price { get; set; }
         public double Quantity { get; set; }
+
+        public void SetDisanId(int disanId)
+        {
+            DisanId = disanId;
+        }
+
+        public void SetStockId(int stockId)
+        {
+            StockId = stockId;
+        }
+
+        public void SetPrice(double price)
+        {
+            Price = price;
+        }
+
+        public void SetQuantity (double quantity)
+        {
+            Quantity = quantity;
+        }
     }
 }

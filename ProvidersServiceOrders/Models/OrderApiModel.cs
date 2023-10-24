@@ -18,5 +18,15 @@ namespace ProvidersServiceOrders.Models
         {
             JournalId = journalId;
         }
+
+        public int GetJrId()
+        {
+            return (int)JrId;
+        }
+
+        public void AddProduct(OrderProductApiModel product)
+        {
+            ProductPart.Add(product);
+        }
     }
 }
