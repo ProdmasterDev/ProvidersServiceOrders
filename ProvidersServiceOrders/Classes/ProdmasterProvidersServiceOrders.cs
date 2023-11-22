@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ProvidersServiceOrders.Classes.Extensions;
 using ProvidersServiceOrders.Classes.Rest;
 using ProvidersServiceOrders.Interfaces;
 using ProvidersServiceOrders.Models;
@@ -12,26 +13,16 @@ namespace ProvidersServiceOrders.Classes
 {
     public class ProdmasterProvidersServiceOrders : IRest
     {
-        public string ApiUri { get; set; } = "https://partner.prodmasterpro.ru/api";
         public ProdmasterProvidersServiceOrders() { }
-        public ProdmasterProvidersServiceOrders(bool debug) { if (debug) { ApiUri = "http://localhost:5656/api"; } }
 
         public List<OrderApiModel> GetOrders()
         {
-            var result = Execute<object, List<OrderApiModel>>(nameof(IRest.GetOrders), new object());
-            if (result != null)
-                return result;
-            else
-                return new List<OrderApiModel>();
+            return Execute<object, List<OrderApiModel>>(nameof(IRest.GetOrders), new object()) ?? new List<OrderApiModel>();
         }
 
         public OrderApiResponseModel CreateOrder(OrderApiModel order)
         {
-            var result = Execute<OrderApiModel, OrderApiResponseModel>(nameof(IRest.CreateOrder), order);
-            if (result != null)
-                return result;
-            else
-                return new OrderApiResponseModel();
+            return Execute<OrderApiModel, OrderApiResponseModel>(nameof(IRest.CreateOrder), order) ?? new OrderApiResponseModel();
         }
 
         public void ApproveOrders(List<OrderApiModel> orders)
@@ -46,20 +37,12 @@ namespace ProvidersServiceOrders.Classes
 
         private OutputType Execute<InputType, OutputType>(string restMethodName, InputType data)
         {
-            try
+            using (var client = new RestClient() { ApiUri = DisanOrdersGlobalSettings.GetConfiguration().ActualApiUri })
             {
-                using (var client = new RestClient() { ApiUri = ApiUri })
-                {
-                    var request = new RestRequest<InputType>();
-                    request.RestMethod = restMethodName;
-                    request.Data = data;
-                    return client.ExecuteRequest<InputType, OutputType>(request);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-                return default;
+                var request = new RestRequest<InputType>();
+                request.RestMethod = restMethodName;
+                request.Data = data;
+                return client.ExecuteRequest<InputType, OutputType>(request);
             }
         }
     }

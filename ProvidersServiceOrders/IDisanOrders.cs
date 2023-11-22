@@ -15,5 +15,6 @@ namespace ProvidersServiceOrders
         OrderProductApiModel GetOrderProductApiModelInstance();
         OrderApiModel GetOrderApiModelInstance();
         string SerializeIntoJson(object o);
+        int GetOrderStateValueByName(string name);
     }
 }

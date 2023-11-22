@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,14 @@ namespace ProvidersServiceOrders.Models
         public long Object { get; set; }
         public DateTime Date { get; set; }
         public string DeclineNote { get; set; } = string.Empty;
+
+        public OrderState OrderState { get; set; } = OrderState.New;
         public List<OrderProductApiModel> ProductPart { get; set; } = new List<OrderProductApiModel>();
+
+        public ArrayList GetOrderProductPart()
+        {
+            return new ArrayList(ProductPart);
+        }
         public void SetJournalId(long journalId)
         {
             JournalId = journalId;

@@ -21,6 +21,7 @@ namespace ProvidersServiceOrders.Classes.Rest
             get { return _restMethod; }
             set
             {
+                //Перед тем как установить значение RestMethod проверяем, есть ли такой метод в интерфейсе
                 var type = typeof(IRest);
                 var methods = type.GetMethods();
                 if (methods != null && methods.Length > 0)
@@ -29,6 +30,7 @@ namespace ProvidersServiceOrders.Classes.Rest
                     if (method != null)
                     {
                         _restMethod = value;
+                        //Вызываем метод, который по атрибуту метода получает тип Http запроса
                         Method = GetHttpMethodByRestMethod(method.ReturnType);
                     }
                 }
@@ -36,6 +38,8 @@ namespace ProvidersServiceOrders.Classes.Rest
         }
         public ResponseType Execute<ResponseType>(string uri, HttpClient client)
         {
+            //при инициализации RestMethod заполнялся тип http запроса (property Method), у каждого класса http запроса
+            //есть метод Execute, который они наследуют от абстрактного класса HttpMethod
             return Method.Execute<InputDataType, ResponseType>($"{uri}/{RestMethod}", client, Data);
         }
 

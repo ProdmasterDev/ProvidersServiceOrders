@@ -46,22 +46,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Attributes\HttpMethodAttribute.cs" />
+    <Compile Include="Classes\DisanOrdersConfiguration.cs" />
+    <Compile Include="Classes\DisanOrdersGlobalSettings.cs" />
+    <Compile Include="Classes\Extensions\RestMethodHelper.cs" />
     <Compile Include="Classes\HttpMethods\Get.cs" />
     <Compile Include="Classes\HttpMethods\HttpMethod.cs" />
     <Compile Include="Classes\HttpMethods\Post.cs" />
+    <Compile Include="Classes\ProdmasterProvidersServiceOrdersGeneric.cs" />
     <Compile Include="Classes\ProdmasterProvidersServiceOrders.cs" />
+    <Compile Include="Classes\RestFactory.cs" />
     <Compile Include="Classes\Rest\RestClient.cs" />
+    <Compile Include="Classes\Rest\RestMethod.cs" />
     <Compile Include="Classes\Rest\RestRequest.cs" />
     <Compile Include="DisanOrders.cs" />
     <Compile Include="IDisanOrders.cs" />
     <Compile Include="Interfaces\HttpMethods\IHttpMethod.cs" />
     <Compile Include="Interfaces\IRest.cs" />
+    <Compile Include="Models\ApiAddresses.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderApiModel.cs" />
     <Compile Include="Models\OrderApiResponseModel.cs" />
     <Compile Include="Models\OrderListManager.cs" />
     <Compile Include="Models\OrderProductApiModel.cs" />
     <Compile Include="Models\OrderState.cs" />
+    <Compile Include="Models\WorkMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

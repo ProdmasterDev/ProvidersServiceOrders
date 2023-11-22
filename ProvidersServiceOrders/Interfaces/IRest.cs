@@ -10,6 +10,7 @@ namespace ProvidersServiceOrders.Interfaces
 {
     public interface IRest
     {
+        //названия методов должны совпадать с соответствующими названиями на сайте
         [HttpMethod("Post")]
         OrderApiResponseModel CreateOrder(OrderApiModel order);
         [HttpMethod("Post")]

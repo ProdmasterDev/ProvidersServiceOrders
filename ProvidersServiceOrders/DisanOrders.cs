@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ProvidersServiceOrders.Classes;
+using ProvidersServiceOrders.Interfaces;
 using ProvidersServiceOrders.Models;
 using System;
 using System.Collections;
@@ -14,19 +15,25 @@ namespace ProvidersServiceOrders
     [ComVisible(true)]
     public class DisanOrders : IDisanOrders
     {
-        private bool _debug = false;
-        public void SetDebugMode() { _debug = true; }
-        public DisanOrders() { }
+        private readonly IRest _restService;
+        public void SetDebugMode() { DisanOrdersGlobalSettings.InitDebug(); }
+        public DisanOrders() 
+        {
+            DisanOrdersGlobalSettings.GetConfiguration();
+            //инициализируем сервис для rest с помощью фабрики
+            //надо проверить, что будет лучше работать, обычный
+            //или generic сервис
+            //а может вообще кто-то решится мою запутанную
+            //систему переписать и сделает свой
+            _restService = new RestFactory<ProdmasterProvidersServiceOrdersGeneric>().GetServiceInstance();
+        }
         public OrderApiResponseModel CreateOrder(OrderApiModel order)
         {
-            var service = new ProdmasterProvidersServiceOrders(_debug);
-            return service.CreateOrder(order);
+            return _restService.CreateOrder(order);
         }
-
         public ArrayList GetOrders()
         {
-            var service = new ProdmasterProvidersServiceOrders(_debug);
-            var orders = service.GetOrders();
+            var orders = _restService.GetOrders();
             var list = new ArrayList();
             foreach (var order in orders)
             {
@@ -37,15 +44,13 @@ namespace ProvidersServiceOrders
 
         public void ApproveOrders(OrderListManager listManager)
         {
-            var service = new ProdmasterProvidersServiceOrders(_debug);
             var orders = listManager.GetOrders();
-            service.ApproveOrders(orders);
+            _restService.ApproveOrders(orders);
         }
 
         public void DeclineOrder(OrderApiModel order)
         {
-            var service = new ProdmasterProvidersServiceOrders(_debug);
-            service.DeclineOrder(order);
+            _restService.DeclineOrder(order);
         }
 
         public OrderListManager GetListOfOrderApiModelInstance()
@@ -66,6 +71,11 @@ namespace ProvidersServiceOrders
         public string SerializeIntoJson(object o)
         {
             return JsonConvert.SerializeObject(o);
+        }
+
+        public int GetOrderStateValueByName(string name)
+        {
+            return (int)Enum.Parse(typeof(OrderState), name);
         }
     }
 }

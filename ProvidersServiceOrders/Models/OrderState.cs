@@ -13,6 +13,7 @@ namespace ProvidersServiceOrders.Models
         DeclinedByProvider,
         ApprovedConfirmationByProvider,
         ApprovedDeclineByProvider,
-        DeclinedByRecipient
+        DeclinedByRecipient,
+        EditedByProvider,
     }
 }

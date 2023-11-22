@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProvidersServiceOrders.Classes.Attributes
 {
+    //описание кастомного аттрибута типов Http запросов методов
     [AttributeUsage(AttributeTargets.All)]
     public class HttpMethodAttribute : System.Attribute
     {
