@@ -1,8 +1,10 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,6 +32,14 @@ namespace ProvidersServiceOrders.Classes.Rest
         public OutputDataType ExecuteRequest<InputDataType, OutputDataType>(RestRequest<InputDataType> request)
         {
             return request.Execute<OutputDataType>(ApiUri, Client);
+        }
+
+        public object ExecuteRequestGeneric<InputDataType, OutputDataType>(object request)
+        {
+            return request.GetType()
+                .GetRuntimeMethod("Execute", new Type[] { typeof(OutputDataType) })
+                .MakeGenericMethod(new Type[] { typeof(OutputDataType) })
+                .Invoke(this, new object[] { ApiUri, Client });
         }
 
         public void Dispose()

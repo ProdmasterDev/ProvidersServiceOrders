@@ -13,6 +13,15 @@ namespace ProvidersServiceOrders.Models
         public double Price { get; set; }
         public double Quantity { get; set; }
 
+
+        public int GetDisanId()
+        {
+            return (int)DisanId;
+        }
+        public double GetQuantity()
+        {
+            return Quantity;
+        }
         public void SetDisanId(int disanId)
         {
             DisanId = disanId;
