@@ -1,13 +1,7 @@
-﻿using Newtonsoft.Json;
-using ProvidersServiceOrders.Classes.Extensions;
-using ProvidersServiceOrders.Classes.Rest;
+﻿using ProvidersServiceOrders.Classes.Extensions;
 using ProvidersServiceOrders.Interfaces;
 using ProvidersServiceOrders.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProvidersServiceOrders.Classes
 {
