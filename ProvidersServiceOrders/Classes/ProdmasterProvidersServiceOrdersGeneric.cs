@@ -15,26 +15,28 @@ namespace ProvidersServiceOrders.Classes
 
         public List<OrderApiModel> GetOrders()
         {
-            return (List<OrderApiModel>)System.Reflection.MethodBase
+            return this
                 .GetCurrentMethod()
                 .Configure()
                 .AddApiUri(DisanOrdersGlobalSettings.GetConfiguration().ActualApiUri)
-                .Execute();
+                .Execute()
+                .PerformTypeConversion<List<OrderApiModel>>();
         }
 
         public OrderApiResponseModel CreateOrder(OrderApiModel order)
         {
-            return (OrderApiResponseModel)System.Reflection.MethodBase
+            return this
                 .GetCurrentMethod()
                 .Configure()
                 .AddApiUri(DisanOrdersGlobalSettings.GetConfiguration().ActualApiUri)
                 .AddArguement(order)
-                .Execute();
+                .Execute()
+                .PerformTypeConversion<OrderApiResponseModel>();
         }
 
         public void ApproveOrders(List<OrderApiModel> orders)
         {
-            System.Reflection.MethodBase
+            this
                 .GetCurrentMethod()
                 .Configure()
                 .AddApiUri(DisanOrdersGlobalSettings.GetConfiguration().ActualApiUri)
@@ -44,7 +46,7 @@ namespace ProvidersServiceOrders.Classes
 
         public void DeclineOrder(OrderApiModel order)
         {
-            System.Reflection.MethodBase
+            this
                 .GetCurrentMethod()
                 .Configure()
                 .AddApiUri(DisanOrdersGlobalSettings.GetConfiguration().ActualApiUri)
