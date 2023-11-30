@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\HttpMethods\IHttpMethod.cs" />
     <Compile Include="Interfaces\IRest.cs" />
     <Compile Include="Models\ApiAddresses.cs" />
+    <Compile Include="Models\Base\OrderBase.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderApiModel.cs" />
     <Compile Include="Models\OrderApiResponseModel.cs" />
