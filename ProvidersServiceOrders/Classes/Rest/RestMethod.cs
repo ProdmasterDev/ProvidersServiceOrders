@@ -3,6 +3,8 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +26,8 @@ namespace ProvidersServiceOrders.Classes.Rest
             //Заполняем экземпляр класса данными
             _name = _mb.Name;
             AddArguement(inputValue);
-            _returnType = ((MethodInfo)_mb).ReturnType;
+            var type = ((MethodInfo)_mb).ReturnType;
+            _returnType = (type == typeof(void)) ? typeof(object) : type;
             return this;
         }
 
