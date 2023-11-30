@@ -17,9 +17,11 @@ namespace ProvidersServiceOrders
     {
         private readonly IRest _restService;
         public void SetDebugMode() { DisanOrdersGlobalSettings.InitDebug(); }
+        public void SetDebugModeLocal() { DisanOrdersGlobalSettings.InitDebugLocal(); }
         public DisanOrders() 
         {
             DisanOrdersGlobalSettings.GetConfiguration();
+            DisanOrdersGlobalSettings.InitProd();
             //инициализируем сервис для rest с помощью фабрики
             //надо проверить, что будет лучше работать, обычный
             //или generic сервис
